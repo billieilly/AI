@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>산타의 귓속말</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+:root{
+  --cream:#f7f0e5;
+  --paper:#fffaf1;
+  --green:#173b31;
+  --green2:#245545;
+  --red:#a43b39;
+  --gold:#c4a66b;
+  --ink:#27352e;
+  --muted:#6c766e;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Noto Sans KR',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body:before{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.45;
+  background:
+    radial-gradient(circle at 10% 10%,#fff 0 1px,transparent 2px),
+    radial-gradient(circle at 80% 20%,#fff 0 1px,transparent 2px),
+    radial-gradient(circle at 30% 70%,#fff 0 1px,transparent 2px);
+  background-size:120px 130px,160px 170px,200px 180px;
+}
+.snow{
+  position:fixed;
+  top:-10px;
+  color:white;
+  opacity:.8;
+  pointer-events:none;
+  animation:fall linear infinite;
+  z-index:0;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(180deg)}
+}
+main{
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:24px;
+}
+.card{
+  width:min(100%,490px);
+  min-height:650px;
+  background:var(--paper);
+  border:1px solid #e3d8c5;
+  border-radius:28px;
+  box-shadow:0 20px 60px #1a34251a;
+  overflow:hidden;
+  position:relative;
+}
+.screen{
+  display:none;
+  padding:34px 27px 28px;
+  min-height:650px;
+  animation:fade .4s ease;
+}
+.screen.active{
+  display:flex;
+  flex-direction:column;
+}
+@keyframes fade{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+.cover{
+  background:radial-gradient(ellipse at 50% 42%,#285c49 0%,#183c32 48%,#0d2923 100%);
+  color:#fff8eb;
+  text-align:center;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+.cover:before{
+  content:'✦';
+  position:absolute;
+  top:75px;
+  left:30px;
+  color:#d7bd80;
+  font-size:25px;
+}
+.cover:after{
+  content:'❄';
+  position:absolute;
+  bottom:55px;
+  right:32px;
+  color:#d7bd80;
+  font-size:26px;
+}
+.eyebrow{
+  font-size:12px;
+  letter-spacing:3px;
+  color:#cbb780;
+  margin-bottom:18px;
+}
+.cover h1{
+  font-family:'Gowun Batang',serif;
+  font-size:47px;
+  line-height:1.2;
+  margin:0 0 18px;
+  letter-spacing:1px;
+  text-shadow:0 3px 12px #0003;
+}
+.cover p{
+  color:#e9dfcf;
+  font-size:14px;
+  line-height:1.9;
+  margin:0;
+}
+.tree-wrap{
+  position:relative;
+  margin:12px 0 6px;
+}
+.tree{
+  font-size:94px;
+  margin:0;
+  filter:drop-shadow(0 9px 8px #0005);
+}
+.tree-star{
+  position:absolute;
+  top:-7px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:24px;
+}
+.cover .small{
+  margin-top:22px;
+  color:#cbb780;
+  font-size:12px;
+  letter-spacing:2px;
+}
+.decor{
+  font-size:28px;
+  letter-spacing:9px;
+  margin:0 0 10px;
+  color:var(--gold);
+}
+.topline{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:26px;
+}
+.progress{
+  height:4px;
+  background:#e9e1d3;
+  border-radius:9px;
+  overflow:hidden;
+  margin:0 0 26px;
+}
+.progress i{
+  height:100%;
+  display:block;
+  background:var(--green2);
+  transition:width .3s;
+}
+.screen h2{
+  font-family:'Gowun Batang',serif;
+  font-size:29px;
+  line-height:1.35;
+  margin:0 0 8px;
+  color:var(--green);
+}
+.subtitle{
+  font-size:14px;
+  color:var(--muted);
+  margin:0 0 24px;
+  line-height:1.7;
+}
+.options{
+  display:grid;
+  gap:11px;
+  margin:6px 0 24px;
+}
+.option{
+  border:1px solid #e1d7c7;
+  background:#fffdf8;
+  border-radius:15px;
+  padding:15px 16px;
+  text-align:left;
+  cursor:pointer;
+  transition:.2s;
+  color:var(--ink);
+  font-size:15px;
+}
+.option:hover{
+  border-color:#7c9a88;
+  transform:translateY(-1px);
+}
+.option.selected{
+  border:1.5px solid var(--green2);
+  background:#eaf0e8;
+}
+.option strong{
+  display:block;
+  color:var(--green);
+  margin-bottom:4px;
+}
+.option span{
+  font-size:12px;
+  color:var(--muted);
+}
+.btn{
+  border:0;
+  border-radius:14px;
+  padding:15px 18px;
+  font-family:inherit;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+}
+.primary{
+  background:var(--green);
+  color:#fff;
+}
+.primary:hover{
+  background:var(--green2);
+}
+.secondary{
+  background:#eee5d7;
+  color:var(--green);
+}
+.secondary:hover{
+  background:#e4d8c5;
+}
+.btn:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+.bottom{
+  margin-top:auto;
+  display:flex;
+  gap:10px;
+}
+.bottom .btn{
+  flex:1;
+}
+.result-list{
+  display:grid;
+  gap:12px;
+  margin-bottom:20px;
+}
+.gift{
+  background:#fff;
+  border:1px solid #e8dece;
+  border-radius:16px;
+  padding:15px;
+}
+.gift .num{
+  font-size:11px;
+  color:var(--red);
+  letter-spacing:1px;
+}
+.gift h3{
+  margin:5px 0;
+  color:var(--green);
+  font-size:17px;
+}
+.gift .price{
+  color:var(--red);
+  font-size:13px;
+  font-weight:700;
+}
+.gift .brand{
+  font-size:12px;
+  color:#315143;
+  background:#f2eadf;
+  display:inline-block;
+  border-radius:8px;
+  padding:5px 8px;
+  margin:2px 0 5px;
+}
+.gift p{
+  font-size:13px;
+  color:#626e65;
+  line-height:1.65;
+  margin:7px 0 0;
+}
+.note{
+  background:#f3eadc;
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:18px;
+}
+.note .label{
+  font-size:11px;
+  letter-spacing:2px;
+  color:var(--red);
+}
+.note p{
+  font-family:'Gowun Batang',serif;
+  font-size:17px;
+  line-height:1.8;
+  margin:8px 0 12px;
+}
+.note .btn{
+  width:100%;
+}
+.tiny{
+  text-align:center;
+  font-size:11px;
+  color:#9a9a8c;
+  margin-top:15px;
+}
+.screen.scroll{
+  overflow-y:auto;
+}
+.result-actions{
+  display:grid;
+  gap:10px;
+}
+.toast{
+  font-size:12px;
+  color:var(--green);
+  text-align:center;
+  min-height:20px;
+  margin-top:8px;
+  font-weight:500;
+}
+.voice-panel{
+  position:absolute;
+  z-index:5;
+  top:12px;
+  right:12px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:#fffdf2eF;
+  border:1px solid #d9cba9;
+  border-radius:999px;
+  padding:6px 8px;
+  box-shadow:0 3px 12px #0001;
+  font-size:11px;
+}
+.voice-panel select{
+  max-width:100px;
+  border:0;
+  background:transparent;
+  color:var(--green);
+  font-size:11px;
+  outline:none;
+}
+.voice-btn{
+  border:0;
+  background:#244f3d;
+  color:white;
+  border-radius:50%;
+  width:28px;
+  height:28px;
+  cursor:pointer;
+  font-size:13px;
+}
+.voice-panel label{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  color:var(--green);
+  white-space:nowrap;
+}
+.voice-panel input{
+  accent-color:var(--green);
+}
+.music-panel{
+  position:absolute;
+  z-index:5;
+  top:52px;
+  right:12px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:#fffdf2eF;
+  border:1px solid #d9cba9;
+  border-radius:999px;
+  padding:6px 8px;
+  box-shadow:0 3px 12px #0001;
+  font-size:11px;
+}
+.music-panel select{
+  max-width:112px;
+  border:0;
+  background:transparent;
+  color:var(--green);
+  font-size:11px;
+  outline:none;
+}
+.music-btn{
+  border:0;
+  background:#a43b39;
+  color:white;
+  border-radius:50%;
+  width:28px;
+  height:28px;
+  cursor:pointer;
+  font-size:13px;
+}
+.music-panel input{
+  accent-color:var(--red);
+}
+.cover-garland{
+  position:absolute;
+  top:18px;
+  left:0;
+  right:0;
+  color:#e7d39c;
+  font-size:17px;
+  letter-spacing:2px;
+  opacity:.95;
+}
+.cover-sticker{
+  position:absolute;
+  font-size:36px;
+  filter:drop-shadow(0 4px 5px #0004);
+}
+.sticker-left{
+  left:22px;
+  top:31%;
+  transform:rotate(-15deg);
+  color:#e9e1cf;
+}
+.sticker-right{
+  right:22px;
+  top:34%;
+  transform:rotate(12deg);
+}
+.cover-ribbon{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#f2dca4;
+  border:1px solid #cbb78088;
+  border-radius:999px;
+  padding:6px 13px;
+  margin:7px 0 12px;
+}
+.cover-tags{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:7px;
+  margin-top:20px;
+}
+.cover-tags span{
+  font-size:10px;
+  color:#f6ead6;
+  background:#ffffff12;
+  border:1px solid #ffffff30;
+  border-radius:999px;
+  padding:7px 9px;
+}
+.cover-start{
+  background:linear-gradient(135deg,#f0d99e,#c5a766)!important;
+  color:#183a30!important;
+  box-shadow:0 7px 18px #0003;
+}
+.cover-bottom{
+  position:absolute;
+  bottom:13px;
+  left:0;
+  right:0;
+  font-size:9px;
+  letter-spacing:3px;
+  color:#cbb78088;
+}
+@media(max-width:500px){
+  main{padding:0}
+  .card{border-radius:0;min-height:100vh;width:100%}
+  .screen{min-height:100vh;padding:90px 23px 30px}
+  .voice-panel{top:10px;right:10px}
+  .music-panel{top:50px;right:10px}
+  .cover-garland{font-size:14px}
+  .cover-sticker{font-size:29px}
+  .cover h1{font-size:43px}
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="card">
+    <!-- 상단 우측 음성 안내 컨트롤 -->
+    <div class="voice-panel" aria-label="음성 안내 설정">
+      <label><input type="checkbox" id="voiceOn" checked> 음성</label>
+      <select id="voiceSelect" aria-label="음성 선택">
+        <option value="auto">부드러운 여성 음성 자동 선택</option>
+      </select>
+      <button class="voice-btn" id="voiceReplay" title="현재 화면 다시 듣기" onclick="speakCurrent()">▶</button>
+    </div>
+
+    <!-- 상단 우측 크리스마스 BGM 컨트롤 -->
+    <div class="music-panel" aria-label="크리스마스 배경 음악">
+      <label><input type="checkbox" id="musicOn"> 🎵 BGM</label>
+      <select id="musicSelect" aria-label="배경 음악 선택">
+        <option value="bell">오르골 크리스마스</option>
+        <option value="carol">캐럴 분위기</option>
+        <option value="calm">잔잔한 겨울</option>
+      </select>
+      <button class="music-btn" id="musicToggle" type="button" title="배경 음악 재생/정지">▶</button>
+    </div>
+
+    <!-- 표지 화면 -->
+    <section class="screen cover active" id="s0">
+      <div class="cover-garland">✦　🔔　❄　🎀　❄　🔔　✦</div>
+      <div class="cover-sticker sticker-left">❄</div>
+      <div class="cover-sticker sticker-right">🎁</div>
+      <div class="eyebrow">A LITTLE CHRISTMAS MAGIC</div>
+      <div class="tree-wrap">
+        <div class="tree">🎄</div>
+        <span class="tree-star">✨</span>
+      </div>
+      <div class="cover-ribbon">SPECIAL GIFT GUIDE</div>
+      <h1>산타의<br>귓속말</h1>
+      <p>그 사람의 작은 힌트를 들려주세요.<br>산타가 마음에 꼭 닿는 선물을 속삭여 줄게요.</p>
+      <div class="cover-tags">
+        <span>☃️ 겨울의 설렘</span>
+        <span>♡ 마음을 담아</span>
+        <span>🧦 선물 한 조각</span>
+      </div>
+      <div class="small">A GIFT MADE WITH HEART</div>
+      <button class="btn primary cover-start" style="margin-top:28px" onclick="go(1)">선물 찾으러 가기　✧</button>
+      <div class="cover-bottom">MERRY &amp; BRIGHT CHRISTMAS · MADE WITH CHATGPT</div>
+    </section>
+
+    <!-- 1단계: 대상 선택 -->
+    <section class="screen" id="s1">
+      <div class="topline"><span>산타의 선물 편지</span><span>01 / 03</span></div>
+      <div class="progress"><i style="width:33%"></i></div>
+      <div class="decor">❄ ✦ ❄</div>
+      <h2>누구에게 선물할까요?</h2>
+      <p class="subtitle">선물 받을 사람과의 관계를 골라주세요.</p>
+      <div class="options" id="rel">
+        <button class="option" data-value="친구" onclick="choose(this,'rel')"><strong>🧣 친구</strong><span>편하고 소중한 나의 친구</span></button>
+        <button class="option" data-value="연인" onclick="choose(this,'rel')"><strong>💌 연인</strong><span>마음을 나누는 특별한 사람</span></button>
+        <button class="option" data-value="가족" onclick="choose(this,'rel')"><strong>🕯️ 가족</strong><span>늘 곁에 있어 주는 사람</span></button>
+      </div>
+      <div class="bottom">
+        <button class="btn secondary" onclick="go(0)">이전</button>
+        <button class="btn primary" id="next1" disabled onclick="go(2)">다음</button>
+      </div>
+    </section>
+
+    <!-- 2단계: 취향 힌트 선택 -->
+    <section class="screen" id="s2">
+      <div class="topline"><span>산타의 선물 편지</span><span>02 / 03</span></div>
+      <div class="progress"><i style="width:66%"></i></div>
+      <div class="decor">❄ ✦ ❄</div>
+      <h2>요즘 그 사람은?</h2>
+      <p class="subtitle">최근 말이나 취향을 떠올려 하나 골라주세요.</p>
+      <div class="options" id="hint">
+        <button class="option" data-value="따뜻하고 포근한 걸 좋아해" onclick="choose(this,'hint')"><strong>🧤 따뜻하고 포근한 걸 좋아해</strong><span>담요, 겨울 소품, 편안함</span></button>
+        <button class="option" data-value="실용적인 물건을 좋아해" onclick="choose(this,'hint')"><strong>☕ 실용적인 물건을 좋아해</strong><span>매일 쓰는 생활 아이템</span></button>
+        <button class="option" data-value="취미에 푹 빠져 있어" onclick="choose(this,'hint')"><strong>🎧 요즘 취미에 푹 빠져 있어</strong><span>취미와 관심사 관련 선물</span></button>
+        <button class="option" data-value="향기나 분위기를 좋아해" onclick="choose(this,'hint')"><strong>🕯️ 향기나 분위기를 좋아해</strong><span>향, 공간, 감성 아이템</span></button>
+        <button class="option" data-value="맛있는 간식이 최고야" onclick="choose(this,'hint')"><strong>🍪 맛있는 간식이 최고야</strong><span>달콤한 간식과 먹거리</span></button>
+        <button class="option" data-value="요즘 쉬고 싶다고 자주 말해" onclick="choose(this,'hint')"><strong>🛌 요즘 쉬고 싶다고 자주 말해</strong><span>휴식과 힐링을 위한 선물</span></button>
+      </div>
+      <div class="bottom">
+        <button class="btn secondary" onclick="go(1)">이전</button>
+        <button class="btn primary" id="next2" disabled onclick="go(3)">다음</button>
+      </div>
+    </section>
+
+    <!-- 3단계: 예산 선택 -->
+    <section class="screen" id="s3">
+      <div class="topline"><span>산타의 선물 편지</span><span>03 / 03</span></div>
+      <div class="progress"><i style="width:100%"></i></div>
+      <div class="decor">❄ ✦ ❄</div>
+      <h2>선물 예산은 얼마인가요?</h2>
+      <p class="subtitle">마음은 크게, 예산은 편안하게 골라주세요.</p>
+      <div class="options" id="budget">
+        <button class="option" data-value="30" onclick="choose(this,'budget')"><strong>🎁 부담 없이 정성 담아</strong><span>약 3만 원대 · 가볍고 센스 있게</span></button>
+        <button class="option" data-value="50" onclick="choose(this,'budget')"><strong>🎀 조금 더 특별하게</strong><span>약 5만 원대 · 조금 더 특별하게</span></button>
+        <button class="option" data-value="100" onclick="choose(this,'budget')"><strong>✨ 제대로 마음 전하기</strong><span>10만 원 이상 · 오래 쓸 선물까지</span></button>
+      </div>
+      <div class="bottom">
+        <button class="btn secondary" onclick="go(2)">이전</button>
+        <button class="btn primary" id="resultBtn" disabled onclick="showResult()">선물 추천 받기</button>
+      </div>
+    </section>
+
+    <!-- 결과 화면 -->
+    <section class="screen scroll" id="s4">
+      <div class="topline"><span>산타가 찾은 선물</span><span>FOR YOU ♥</span></div>
+      <div class="decor">✦ ❄ ✦</div>
+      <h2>산타의 추천 선물</h2>
+      <p class="subtitle" id="resultSub">그 사람을 떠올리며 골라 봤어요.</p>
+      <div class="result-list" id="giftList"></div>
+      <div class="note">
+        <div class="label">CHRISTMAS CARD</div>
+        <p id="cardText"></p>
+        <button class="btn secondary" id="copyCardBtn" onclick="copyCard()">카드 문구 복사하기</button>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn primary" onclick="restart()">처음부터 다시</button>
+      </div>
+      <div class="tiny">산타의 귓속말 · 당신의 마음이 전해지길<br>ChatGPT를 활용하여 제작되었습니다</div>
+    </section>
+  </div>
+</main>
+
+<script>
+const state = { rel: '', hint: '', budget: '' };
+let availableVoices = [];
+let voiceEnabled = true;
+
+const voiceOn = document.getElementById('voiceOn');
+const voiceSelect = document.getElementById('voiceSelect');
+
+// 한국어 여성 음성 우선순위 점수 계산
+function femaleVoiceScore(v) {
+  const name = (v.name + ' ' + v.lang).toLowerCase();
+  let score = 0;
+  if (v.lang.toLowerCase() === 'ko-kr') score += 30;
+  else if (v.lang.toLowerCase().startsWith('ko')) score += 20;
+  if (/female|woman|여성|유나|서연|선희|yuna|seoyeon|sunhi|heami|sora/.test(name)) score += 35;
+  if (/google 한국의|google korean|microsoft.*(sun|heami|female)/.test(name)) score += 15;
+  if (/male|남성|man|인준|junho/.test(name)) score -= 25;
+  return score;
+}
+
+function loadVoices() {
+  if (!('speechSynthesis' in window)) return;
+  availableVoices = speechSynthesis.getVoices().filter(v => v.lang.toLowerCase().startsWith('ko'));
+  const previous = voiceSelect.value;
+  voiceSelect.innerHTML = '<option value="auto">부드러운 여성 음성 자동 선택</option>' +
+    availableVoices.map((v, i) => `<option value="${i}">${v.name}</option>`).join('');
+  if (previous !== '' && previous !== 'auto' && availableVoices[Number(previous)]) {
+    voiceSelect.value = previous;
+  } else {
+    voiceSelect.value = 'auto';
+  }
+}
+
+if ('speechSynthesis' in window) {
+  loadVoices();
+  speechSynthesis.onvoiceschanged = loadVoices;
+} else {
+  voiceOn.checked = false;
+  voiceOn.disabled = true;
+  voiceSelect.disabled = true;
+  document.getElementById('voiceReplay').disabled = true;
+}
+
+voiceOn.addEventListener('change', () => {
+  voiceEnabled = voiceOn.checked;
+  if (!voiceEnabled && 'speechSynthesis' in window) speechSynthesis.cancel();
+  else speakCurrent();
+});
+
+function speak(text) {
+  if (!voiceEnabled || !('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'ko-KR';
+  utter.rate = 0.88;
+  utter.pitch = 1.13;
+  utter.volume = 0.92;
+  let chosen = null;
+  if (voiceSelect.value !== '' && voiceSelect.value !== 'auto') {
+    chosen = availableVoices[Number(voiceSelect.value)];
+  } else {
+    chosen = [...availableVoices].sort((a, b) => femaleVoiceScore(b) - femaleVoiceScore(a))[0];
+  }
+  if (chosen) utter.voice = chosen;
+  speechSynthesis.speak(utter);
+}
+
+function speakCurrent() {
+  if (!voiceEnabled) return;
+  const screen = document.querySelector('.screen.active');
+  if (!screen) return;
+  let text = '';
+  if (screen.id === 's0') {
+    text = '산타의 귓속말. 그 사람의 작은 힌트를 들려주세요. 산타가 마음에 꼭 닿는 선물을 속삭여 줄게요. 선물 찾으러 가기.';
+  } else if (screen.id === 's1') {
+    text = '누구에게 선물할까요? 선물 받을 사람과의 관계를 골라주세요. 친구, 연인, 가족 중 선택해 주세요.';
+  } else if (screen.id === 's2') {
+    text = '요즘 그 사람은? 최근 말이나 취향을 떠올려 하나 골라주세요. 따뜻하고 포근한 것, 실용적인 물건, 취미, 향기와 분위기, 맛있는 간식, 휴식 중에서 선택해 주세요.';
+  } else if (screen.id === 's3') {
+    text = '선물 예산은 얼마인가요? 3만 원대, 5만 원대, 10만 원 이상 중 골라주세요.';
+  } else if (screen.id === 's4') {
+    text = '산타의 추천 선물입니다. ' +
+      document.getElementById('resultSub').textContent + ' ' +
+      Array.from(document.querySelectorAll('#giftList .gift'))
+        .map(g => g.querySelector('h3').textContent + '. ' + g.querySelector('p').textContent)
+        .join(' 다음 추천은 ') +
+      ' 카드 문구. ' + document.getElementById('cardText').textContent;
+  }
+  speak(text);
+}
+
+// 내장 오리지널 크리스마스풍 BGM (Web Audio API)
+const musicOn = document.getElementById('musicOn');
+const musicSelect = document.getElementById('musicSelect');
+const musicToggle = document.getElementById('musicToggle');
+let audioCtx = null, bgmTimer = null, bgmStep = 0, bgmPlaying = false, activeOsc = [];
+
+const tunes = {
+  bell: [[72,0.42],[76,0.42],[79,0.55],[84,0.55],[79,0.42],[76,0.42],[74,0.55],[71,0.55],[72,0.42],[76,0.42],[79,0.55],[84,0.55],[86,0.42],[84,0.42],[79,0.65],[76,0.65]],
+  carol: [[60,0.5],[64,0.5],[67,0.5],[72,0.7],[71,0.5],[69,0.5],[67,0.7],[65,0.5],[64,0.5],[65,0.5],[67,0.7],[60,0.5],[62,0.5],[64,0.5],[65,0.7],[60,0.7]],
+  calm: [[60,0.8],[64,0.8],[67,1],[69,0.8],[67,0.8],[64,1],[62,0.8],[65,0.8],[69,1],[67,0.8],[64,0.8],[60,1]]
+};
+
+function stopBgm() {
+  if (bgmTimer) clearTimeout(bgmTimer);
+  bgmTimer = null;
+  activeOsc.forEach(o => { try { o.stop(); } catch (e) {} });
+  activeOsc = [];
+  bgmPlaying = false;
+  musicToggle.textContent = '▶';
+  musicOn.checked = false;
+}
+
+function playTone(freq, dur, kind = 'sine', gain = 0.045) {
+  if (!audioCtx) return;
+  const osc = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  osc.type = kind;
+  osc.frequency.value = freq;
+  g.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(gain, audioCtx.currentTime + 0.04);
+  g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+  osc.connect(g);
+  g.connect(audioCtx.destination);
+  osc.start();
+  osc.stop(audioCtx.currentTime + dur + 0.05);
+  activeOsc.push(osc);
+  osc.onended = () => { activeOsc = activeOsc.filter(x => x !== osc); };
+}
+
+function bgmTick() {
+  if (!bgmPlaying) return;
+  const tune = tunes[musicSelect.value] || tunes.bell;
+  const [note, dur] = tune[bgmStep % tune.length];
+  playTone(
+    440 * Math.pow(2, (note - 69) / 12),
+    dur * 1.3,
+    musicSelect.value === 'bell' ? 'sine' : 'triangle',
+    musicSelect.value === 'calm' ? 0.025 : 0.04
+  );
+  if (musicSelect.value === 'carol' && bgmStep % 4 === 0) {
+    playTone(220 * Math.pow(2, (note - 69) / 12), dur * 1.2, 'sine', 0.015);
+  }
+  bgmStep++;
+  bgmTimer = setTimeout(bgmTick, dur * 750);
+}
+
+async function startBgm() {
+  if (bgmPlaying) return;
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    await audioCtx.resume();
+    bgmPlaying = true;
+    musicOn.checked = true;
+    musicToggle.textContent = 'Ⅱ';
+    bgmStep = 0;
+    bgmTick();
+  } catch (e) {
+    musicOn.checked = false;
+  }
+}
+
+musicOn.addEventListener('change', () => musicOn.checked ? startBgm() : stopBgm());
+musicToggle.addEventListener('click', () => bgmPlaying ? stopBgm() : startBgm());
+musicSelect.addEventListener('change', () => {
+  if (bgmPlaying) {
+    stopBgm();
+    startBgm();
+  }
+});
+
+// 선택 및 화면 전환
+function choose(el, group) {
+  document.querySelectorAll('#' + group + ' .option').forEach(x => x.classList.remove('selected'));
+  el.classList.add('selected');
+  state[group] = el.dataset.value;
+  if (group === 'rel') document.getElementById('next1').disabled = false;
+  if (group === 'hint') document.getElementById('next2').disabled = false;
+  if (group === 'budget') document.getElementById('resultBtn').disabled = false;
+}
+
+function go(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById('s' + n);
+  target.classList.add('active');
+  target.scrollTop = 0;
+  if (voiceEnabled) speakCurrent();
+}
+
+// 취향 및 예산별 선물 데이터베이스
+const db = {
+  '따뜻하고 포근한 걸 좋아해': {
+    30: [
+      { n: '프리미엄 담요', p: '약 30,000~45,000원', d: '집이나 사무실에서 계절에 상관없이 편하게 사용할 수 있어요.' },
+      { n: '실내 슬리퍼 세트', p: '약 30,000~40,000원', d: '매일 신는 생활용품을 조금 더 좋은 제품으로 선물해요.' },
+      { n: '보온 머그컵 세트', p: '약 30,000~45,000원', d: '따뜻한 음료를 즐길 때 두고두고 쓸 수 있어요.' },
+      { n: '겨울용 목도리', p: '약 30,000~50,000원', d: '색과 디자인을 무난하게 고르면 누구나 활용하기 좋아요.' },
+      { n: '온열 찜질팩 세트', p: '약 30,000~40,000원', d: '추운 날이나 휴식 시간에 편안함을 더해줘요.' }
+    ],
+    50: [
+      { n: '고급 담요 또는 블랭킷', p: '약 50,000~80,000원', d: '부드러운 소재와 넉넉한 크기로 포근하게 사용할 수 있어요.' },
+      { n: '프리미엄 머그·티 세트', p: '약 50,000~70,000원', d: '차나 커피를 즐기는 일상에 작은 여유를 더해요.' },
+      { n: '겨울 액세서리 세트', p: '약 50,000~80,000원', d: '무난한 디자인을 선택하면 취향이나 성별에 관계없이 활용하기 좋아요.' },
+      { n: '마사지 쿠션', p: '약 50,000~90,000원', d: '집에서 편하게 쉬거나 뭉친 곳을 풀 때 사용할 수 있어요.' },
+      { n: '고급 실내 휴식 세트', p: '약 50,000~70,000원', d: '담요와 편안한 소품으로 집에서 쉬는 시간을 만들어 줘요.' }
+    ],
+    100: [
+      { n: '프리미엄 무선 온열 제품', p: '약 100,000원 이상', d: '추운 계절에 따뜻하게 쉬는 데 도움이 되는 실용적인 선물이에요.' },
+      { n: '고급 침구·패브릭 세트', p: '약 100,000~150,000원', d: '매일 사용하는 공간을 편안하게 바꿔 줄 수 있어요.' },
+      { n: '브랜드 겨울 액세서리', p: '약 100,000원 이상', d: '오래 사용할 수 있도록 소재와 디자인을 고려해 고르는 선물이에요.' },
+      { n: '프리미엄 휴식 가전', p: '약 100,000~200,000원', d: '집에서 쉬는 시간을 더 편안하게 만들어 주는 제품이에요.' },
+      { n: '호텔·스파 휴식 이용권', p: '약 100,000원 이상', d: '물건 대신 특별한 휴식과 경험을 선물할 수 있어요.' }
+    ]
+  },
+  '실용적인 물건을 좋아해': {
+    30: [
+      { n: '고속 충전기 세트', p: '약 30,000~45,000원', d: '일상에서 자주 쓰는 충전 용품을 편리하게 업그레이드해요.' },
+      { n: '튼튼한 접이식 우산', p: '약 30,000~40,000원', d: '날씨에 관계없이 오래 활용할 수 있는 실용적인 선물이에요.' },
+      { n: '보온 텀블러', p: '약 30,000~45,000원', d: '음료를 담아 출근·외출·학교 등 어디서나 사용할 수 있어요.' },
+      { n: '데스크 정리 세트', p: '약 30,000~40,000원', d: '책상 위 물건을 깔끔하게 정리할 수 있어요.' },
+      { n: '멀티 충전 케이블·어댑터', p: '약 30,000~40,000원', d: '휴대하거나 집에 두고 쓰기 좋은 생활 필수품이에요.' }
+    ],
+    50: [
+      { n: '무선 보조배터리', p: '약 50,000~80,000원', d: '외출 중 배터리 걱정을 줄여주는 활용도 높은 선물이에요.' },
+      { n: '프리미엄 텀블러', p: '약 50,000~70,000원', d: '깔끔한 디자인과 기능을 함께 고려해 매일 쓰기 좋아요.' },
+      { n: '블루투스 스피커', p: '약 50,000~90,000원', d: '집이나 야외에서 음악과 콘텐츠를 편하게 즐길 수 있어요.' },
+      { n: '스마트 데스크 조명', p: '약 50,000~80,000원', d: '책상이나 침대 옆에서 두루 사용할 수 있는 실용적인 아이템이에요.' },
+      { n: '고급 지갑·카드 케이스', p: '약 50,000~90,000원', d: '평소 들고 다니는 소지품을 깔끔하게 정리할 수 있어요.' }
+    ],
+    100: [
+      { n: '프리미엄 무선 이어폰', p: '약 100,000원 이상', d: '음악이나 영상, 통화 등 일상에서 다양하게 활용할 수 있어요.' },
+      { n: '스마트워치·웨어러블 기기', p: '약 100,000원 이상', d: '일상 활동과 알림을 편리하게 확인할 수 있는 선물이에요.' },
+      { n: '브랜드 백팩·가방', p: '약 100,000~200,000원', d: '학교·출근·여행 등 여러 상황에서 활용할 수 있어요.' },
+      { n: '고급 전동 마사지기', p: '약 100,000원 이상', d: '사용 목적에 맞는 제품을 골라 편안한 휴식에 도움을 줘요.' },
+      { n: '프리미엄 생활 가전', p: '약 100,000~200,000원', d: '자주 쓰는 생활을 조금 더 편리하게 만들어 주는 선물이에요.' }
+    ]
+  },
+  '취미에 푹 빠져 있어': {
+    30: [
+      { n: '취미용품 상품권', p: '약 30,000~50,000원', d: '본인이 원하는 취미 아이템을 직접 고를 수 있어 실패 부담이 적어요.' },
+      { n: '취미 관련 소품', p: '약 30,000~45,000원', d: '좋아하는 활동에 자연스럽게 보탬이 되는 선물이에요.' },
+      { n: '취미 기록 노트 세트', p: '약 30,000~40,000원', d: '아이디어나 활동 기록을 남기며 꾸준히 즐길 수 있어요.' },
+      { n: '보드게임·퍼즐', p: '약 30,000~45,000원', d: '함께 즐길 수도 있고 혼자 시간을 보내기에도 좋아요.' },
+      { n: '취미 입문 키트', p: '약 30,000~50,000원', d: '새로운 활동을 가볍게 시작하거나 즐기는 데 도움을 줘요.' }
+    ],
+    50: [
+      { n: '취미 브랜드 상품권', p: '약 50,000~100,000원', d: '취향이 뚜렷한 사람에게 직접 선택할 기회를 주는 선물이에요.' },
+      { n: '프리미엄 취미 도구', p: '약 50,000~90,000원', d: '평소 쓰던 도구를 더 좋은 제품으로 바꿔 줄 수 있어요.' },
+      { n: '취미 클래스 체험권', p: '약 50,000~100,000원', d: '새로운 경험을 해 보거나 좋아하는 활동을 더 깊이 즐길 수 있어요.' },
+      { n: '고급 보드게임', p: '약 50,000~80,000원', d: '친구나 가족과 함께 즐거운 시간을 보내기 좋은 선물이에요.' },
+      { n: '취미 관련 프리미엄 세트', p: '약 50,000~100,000원', d: '관심 분야에 맞춰 구성하면 취향을 고려한 선물이 돼요.' }
+    ],
+    100: [
+      { n: '취미 전문 장비·도구', p: '약 100,000원 이상', d: '취미를 꾸준히 즐기는 사람에게 실질적인 만족을 줄 수 있어요.' },
+      { n: '공연·전시·스포츠 관람권', p: '약 100,000원 이상', d: '좋아하는 콘텐츠나 활동을 직접 경험하는 선물이에요.' },
+      { n: '프리미엄 취미 클래스', p: '약 100,000~200,000원', d: '전문가에게 배우거나 특별한 경험을 해 볼 수 있어요.' },
+      { n: '취미 관련 기프트 카드', p: '약 100,000원 이상', d: '취향이 세밀한 경우 원하는 제품을 직접 고를 수 있어요.' },
+      { n: '취미 체험 패키지', p: '약 100,000원 이상', d: '평소 관심 있던 활동을 특별한 하루로 경험할 수 있어요.' }
+    ]
+  },
+  '향기나 분위기를 좋아해': {
+    30: [
+      { n: '디퓨저 세트', p: '약 30,000~45,000원', d: '공간에 은은한 향을 더해 분위기를 바꿔 줄 수 있어요.' },
+      { n: '핸드크림·바디케어 세트', p: '약 30,000~45,000원', d: '일상에서 부담 없이 사용할 수 있는 관리 아이템이에요.' },
+      { n: '미니 캔들 세트', p: '약 30,000~40,000원', d: '휴식 시간에 아늑한 분위기를 만들기 좋아요.' },
+      { n: '무드 조명', p: '약 30,000~50,000원', d: '침실이나 책상 주변에 부드러운 빛을 더해 줘요.' },
+      { n: '향기·입욕 소품 세트', p: '약 30,000~45,000원', d: '집에서 여유로운 시간을 보내는 데 어울리는 선물이에요.' }
+    ],
+    50: [
+      { n: '프리미엄 디퓨저', p: '약 50,000~80,000원', d: '공간에 어울리는 향을 골라 오래 즐길 수 있어요.' },
+      { n: '고급 캔들·홀더 세트', p: '약 50,000~70,000원', d: '향과 디자인으로 공간에 포인트를 더해요.' },
+      { n: '감성 무드 조명', p: '약 50,000~90,000원', d: '밝기와 분위기를 조절해 편안한 공간을 만들 수 있어요.' },
+      { n: '프리미엄 바디케어 세트', p: '약 50,000~80,000원', d: '향과 보습을 함께 즐길 수 있는 관리 선물이에요.' },
+      { n: '홈 카페 소품 세트', p: '약 50,000~80,000원', d: '집에서 차나 커피를 즐기는 공간을 꾸밀 수 있어요.' }
+    ],
+    100: [
+      { n: '프리미엄 향·공간 케어 세트', p: '약 100,000원 이상', d: '취향을 고려한 향과 공간 소품으로 특별한 분위기를 선물해요.' },
+      { n: '고급 무드 조명', p: '약 100,000~150,000원', d: '공간을 부드럽게 밝혀 주는 오래 쓸 수 있는 아이템이에요.' },
+      { n: '프리미엄 홈 카페 기기', p: '약 100,000원 이상', d: '집에서 즐기는 차와 커피 시간을 조금 더 특별하게 만들어요.' },
+      { n: '호텔 라운지·카페 이용권', p: '약 100,000원 이상', d: '감각적인 공간에서 여유를 즐길 수 있는 경험 선물이에요.' },
+      { n: '고급 휴식·스파 이용권', p: '약 100,000원 이상', d: '일상에서 벗어나 편안한 시간을 보내도록 선물할 수 있어요.' }
+    ]
+  },
+  '맛있는 간식이 최고야': {
+    30: [
+      { n: '프리미엄 디저트 박스', p: '약 30,000~45,000원', d: '여러 종류의 디저트를 함께 즐길 수 있는 달콤한 선물이에요.' },
+      { n: '커피·쿠키 세트', p: '약 30,000~40,000원', d: '간단한 휴식 시간에 함께 즐기기 좋아요.' },
+      { n: '고급 티·간식 세트', p: '약 30,000~45,000원', d: '차와 어울리는 간식으로 여유로운 시간을 선물해요.' },
+      { n: '취향 맞춤 간식 꾸러미', p: '약 30,000~40,000원', d: '좋아하는 맛을 모아 직접 구성하면 더 정성스러워요.' },
+      { n: '베이커리 상품권', p: '약 30,000~50,000원', d: '받는 사람이 원하는 빵과 디저트를 고를 수 있어요.' }
+    ],
+    50: [
+      { n: '프리미엄 과일·디저트 세트', p: '약 50,000~80,000원', d: '선물용으로 좋은 과일이나 디저트를 함께 즐길 수 있어요.' },
+      { n: '고급 커피 원두·드립 세트', p: '약 50,000~70,000원', d: '커피를 즐기는 사람에게 향과 맛을 경험하는 선물이에요.' },
+      { n: '브랜드 베이커리 기프트 세트', p: '약 50,000~80,000원', d: '여러 가지 빵과 디저트를 골라 즐길 수 있어요.' },
+      { n: '식품·간식 기프트 카드', p: '약 50,000~100,000원', d: '취향이나 알레르기를 고려해 직접 고르게 할 수 있어요.' },
+      { n: '프리미엄 티 세트', p: '약 50,000~80,000원', d: '차를 마시는 일상에 다양한 맛을 더할 수 있어요.' }
+    ],
+    100: [
+      { n: '프리미엄 식품 선물 세트', p: '약 100,000원 이상', d: '좋은 재료로 구성된 선물 세트를 함께 즐기거나 나눌 수 있어요.' },
+      { n: '고급 레스토랑 식사권', p: '약 100,000원 이상', d: '음식과 분위기를 함께 즐기는 특별한 경험을 선물해요.' },
+      { n: '호텔 디저트·애프터눈 티 이용권', p: '약 100,000원 이상', d: '일상에서 벗어나 특별한 시간을 보낼 수 있어요.' },
+      { n: '프리미엄 커피·티 기프트 세트', p: '약 100,000~150,000원', d: '다양한 음료를 즐기는 사람에게 고급스러운 선물이 돼요.' },
+      { n: '식사·디저트 체험권', p: '약 100,000원 이상', d: '함께 맛있는 시간을 보내는 경험을 선물할 수 있어요.' }
+    ]
+  },
+  '요즘 쉬고 싶다고 자주 말해': {
+    30: [
+      { n: '휴식용 안대·쿠션 세트', p: '약 30,000~45,000원', d: '짧은 휴식 시간에도 편안하게 쉴 수 있도록 도와줘요.' },
+      { n: '따뜻한 차·머그 세트', p: '약 30,000~40,000원', d: '차 한 잔과 함께 하루를 천천히 마무리하기 좋아요.' },
+      { n: '입욕·바디케어 세트', p: '약 30,000~45,000원', d: '집에서 편하게 휴식을 즐길 수 있는 선물이에요.' },
+      { n: '휴식용 담요', p: '약 30,000~50,000원', d: '잠깐 쉬거나 소파에 앉아 있을 때 활용하기 좋아요.' },
+      { n: '마사지 볼·스트레칭 소품', p: '약 30,000~40,000원', d: '가볍게 몸을 풀고 휴식하는 데 활용할 수 있어요.' }
+    ],
+    50: [
+      { n: '프리미엄 휴식 키트', p: '약 50,000~80,000원', d: '편안한 휴식에 필요한 소품을 한 번에 선물할 수 있어요.' },
+      { n: '마사지 쿠션', p: '약 50,000~90,000원', d: '집에서 쉬는 시간에 편리하게 사용할 수 있어요.' },
+      { n: '고급 수면·휴식 세트', p: '약 50,000~80,000원', d: '수면 안대와 편안한 소품으로 휴식 환경을 꾸려요.' },
+      { n: '홈 스파·입욕 세트', p: '약 50,000~70,000원', d: '집에서 여유롭게 몸과 마음을 돌볼 수 있어요.' },
+      { n: '차·커피 휴식 패키지', p: '약 50,000~80,000원', d: '좋아하는 음료와 휴식 시간을 함께 선물해요.' }
+    ],
+    100: [
+      { n: '프리미엄 마사지 기기', p: '약 100,000원 이상', d: '사용 부위와 강도를 고려해 편안한 휴식에 활용할 수 있어요.' },
+      { n: '호텔 스파·마사지 이용권', p: '약 100,000원 이상', d: '일상에서 벗어나 온전히 쉬는 경험을 선물해요.' },
+      { n: '고급 침구·수면 아이템', p: '약 100,000~200,000원', d: '편안한 잠자리와 휴식 환경을 만들어 줄 수 있어요.' },
+      { n: '프리미엄 휴식 가전', p: '약 100,000원 이상', d: '집에서 보내는 휴식 시간을 편리하고 편안하게 해 줘요.' },
+      { n: '숙박·휴식 패키지', p: '약 100,000원 이상', d: '짧은 여행이나 휴식으로 일상에 새로운 기분을 더할 수 있어요.' }
+    ]
+  }
+};
+
+function brandFor(g) {
+  const name = g.n;
+  const map = [
+    [/텀블러|머그|티 세트|차·머그|보온/, ['Stanley(스탠리)', 'LocknLock(락앤락)', 'Thermos(써모스)']],
+    [/충전|보조배터리|케이블|어댑터|무선 이어폰|스피커|웨어러블|스마트워치/, ['Samsung(삼성)', 'Anker(앤커)', 'JBL', 'Apple(애플)']],
+    [/담요|블랭킷|침구|패브릭|슬리퍼|목도리|액세서리|가방|백팩|지갑|카드 케이스|우산/, ['MUJI(무인양품)', 'IKEA(이케아)', 'Kakao Friends(카카오프렌즈)', 'North Face(노스페이스)']],
+    [/디퓨저|캔들|향|바디케어|핸드크림|입욕|스파/, ['LUSH(러쉬)', 'Bath & Body Works', 'Tamburins(탬버린즈)', 'Aesop(이솝)']],
+    [/디저트|커피|티|과일|베이커리|식품|간식|레스토랑|애프터눈/, ['Starbucks(스타벅스)', 'TWG Tea', 'Paris Baguette(파리바게뜨)', 'Godiva(고디바)']],
+    [/조명|마사지|휴식 가전|온열|스마트 데스크|전동|홈 카페/, ['Philips(필립스)', 'Xiaomi(샤오미)', 'Samsung(삼성)', 'IKEA(이케아)']],
+    [/취미|보드게임|퍼즐|클래스|관람|체험|상품권|기프트 카드|도구|장비/, ['LEGO(레고)', 'Nintendo(닌텐도)', 'Coupang Gift Card(쿠팡 상품권)', '문화상품권']]
+  ];
+  for (const [re, brands] of map) {
+    if (re.test(name)) return brands[(Math.random() * brands.length) | 0];
+  }
+  return '브랜드 취향에 맞춰 선택';
+}
+
+function showResult() {
+  const key = state.budget === '30' ? '30' : state.budget === '50' ? '50' : '100';
+  const hintPool = db[state.hint];
+  if (!hintPool || !hintPool[key]) return;
+
+  const pool = hintPool[key];
+  const gifts = [...pool].sort(() => Math.random() - 0.5).slice(0, 3);
+
+  document.getElementById('resultSub').textContent =
+    `${state.rel} · ${key === '30' ? '3만 원대' : key === '50' ? '5만 원대' : '10만 원 이상'} · ${state.hint}에 맞춘 선물이에요.`;
+
+  document.getElementById('giftList').innerHTML = gifts.map((g, i) =>
+    `<article class="gift">
+      <div class="num">GIFT ${String(i + 1).padStart(2, '0')}</div>
+      <h3>${g.n}</h3>
+      <div class="brand">추천 브랜드/구매처: ${brandFor(g)}</div>
+      <div class="price">${g.p}</div>
+      <p>${g.d}</p>
+    </article>`
+  ).join('');
+
+  const card = state.rel === '연인'
+    ? '함께하는 모든 순간이 내게는 큰 선물이야. 추운 겨울에도 늘 따뜻하고 행복하길 바라. 메리 크리스마스!'
+    : state.rel === '가족'
+      ? '늘 곁에서 힘이 되어 줘서 고마워. 추운 겨울 건강하고 따뜻하게 보내길 바라. 사랑하는 마음을 담아, 메리 크리스마스!'
+      : '올 한 해도 함께해 줘서 고마워. 추운 겨울이지만 너의 하루가 따뜻하고 행복한 순간들로 가득했으면 좋겠어. 메리 크리스마스!';
+
+  document.getElementById('cardText').textContent = card;
+  document.getElementById('toast').textContent = '';
+  document.getElementById('copyCardBtn').textContent = '카드 문구 복사하기';
+  go(4);
+}
+
+// 어떤 환경(일반 브라우저, iframe, 로컬 파일 등)에서도 안정적으로 동작하는 자동 복사
+function fallbackCopyText(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'fixed';
+  textarea.style.top = '-9999px';
+  textarea.style.left = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+  textarea.setSelectionRange(0, textarea.value.length);
+  let ok = false;
+  try {
+    ok = document.execCommand('copy');
+  } catch (err) {
+    ok = false;
+  }
+  document.body.removeChild(textarea);
+  return ok;
+}
+
+function onCopySuccess() {
+  const toast = document.getElementById('toast');
+  const btn = document.getElementById('copyCardBtn');
+  toast.textContent = '카드 문구가 클립보드에 복사되었어요!';
+  btn.textContent = '✓ 복사 완료!';
+  setTimeout(() => {
+    btn.textContent = '카드 문구 복사하기';
+  }, 2200);
+}
+
+function copyCard() {
+  const text = document.getElementById('cardText').textContent.trim();
+  if (!text) return;
+
+  // 1차: execCommand 폴백 우선 시도 (iframe 및 로컬 환경 호환성 극대화)
+  if (fallbackCopyText(text)) {
+    onCopySuccess();
+    return;
+  }
+
+  // 2차: Clipboard API 시도
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text)
+      .then(() => onCopySuccess())
+      .catch(() => {
+        document.getElementById('toast').textContent = '문구를 길게 눌러 복사해 주세요.';
+      });
+  } else {
+    document.getElementById('toast').textContent = '문구를 길게 눌러 복사해 주세요.';
+  }
+}
+
+function restart() {
+  state.rel = state.hint = state.budget = '';
+  document.querySelectorAll('.option').forEach(x => x.classList.remove('selected'));
+  document.getElementById('next1').disabled = true;
+  document.getElementById('next2').disabled = true;
+  document.getElementById('resultBtn').disabled = true;
+  document.getElementById('toast').textContent = '';
+  go(0);
+}
+
+// 눈 내리는 배경 파티클 생성
+for (let i = 0; i < 26; i++) {
+  const s = document.createElement('span');
+  s.className = 'snow';
+  s.textContent = ['❄', '·', '✦'][i % 3];
+  s.style.left = Math.random() * 100 + 'vw';
+  s.style.fontSize = (9 + Math.random() * 15) + 'px';
+  s.style.animationDuration = (8 + Math.random() * 13) + 's';
+  s.style.animationDelay = (-Math.random() * 20) + 's';
+  document.body.appendChild(s);
+}
+</script>
+</body>
+</html>
